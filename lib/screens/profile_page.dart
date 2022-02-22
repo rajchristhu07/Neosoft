@@ -444,7 +444,9 @@ class _ProfilePageState extends State<ProfilePage> {
           Expanded(child:
       FlatButton(
         height: 40,
-      onPressed: null,
+        onPressed: () {
+          Navigator.pop(context);
+        },
         child: Text('Previous',   style: TextStyle(
             fontSize: 18, fontWeight: FontWeight.bold,color: primaryColor),
         ),
