@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../utility/image_utility.dart';
 import '../../utility/text_style.dart';
 import '../../utility/theme.dart';
 
@@ -10,9 +9,8 @@ class AppBarWidget {
     return AppBar(
       leading:leading,
       toolbarHeight: 60,
-      elevation: 1,
-      shadowColor: whiteColor,
-      foregroundColor: whiteColor,
+      elevation: 0,
+
       centerTitle: true,
       title: Text(
         title,

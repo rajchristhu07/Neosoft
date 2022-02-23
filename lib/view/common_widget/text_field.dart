@@ -97,13 +97,8 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
                       left: 8.0,
                       right: 8.0),
                   isDense: true,
-                  errorStyle: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w300,
-                    fontStyle: FontStyle.normal,
-                    letterSpacing: 1.2,
-                  ),
+                  errorStyle: TextStyle(fontSize: 9, height: 0),
+
                   errorBorder:const OutlineInputBorder(
                     borderRadius:
                     BorderRadius.all(Radius.circular(0.0)),

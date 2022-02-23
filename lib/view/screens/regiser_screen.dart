@@ -3,13 +3,14 @@ import 'dart:io';
 import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neosoft/view/common_widget/button.dart';
 
 import '../../model/user_model.dart';
-import '../../screens/profile_page.dart';
-import '../../utility/image_utility.dart';
+import '../common_widget/image_utility.dart';
+import 'profile_page.dart';
 import '../../utility/text_style.dart';
 import '../../utility/theme.dart';
 import '../common_widget/appbar.dart';
@@ -61,9 +62,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         appBar: AppBarWidget.appBar("Register",
             ButtonWidget.iconButton(Icons.arrow_back, Colors.black, onPress)),
         body: SingleChildScrollView(
-            physics: const ScrollPhysics(),
             child: Container(
-                padding: const EdgeInsets.only(right: 40, left: 40),
+                padding: const EdgeInsets.only(right: 40, left: 40, bottom: 40),
                 child: Form(
                     key: _formKey,
                     child: Column(
@@ -71,55 +71,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           //image picker
-                          Center(
-                              child: GestureDetector(
-                            onTap: () {
-                              ImagePickerWidget.showPicker(
-                                  context, galleryClick, cameraClick);
-                            },
-                            child: Stack(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: CircleAvatar(
-                                    radius: 51,
-                                    backgroundColor: grayColor,
-                                    child: _image != null
-                                        ? ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            child: Image.file(
-                                              _image!,
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.fitHeight,
-                                            ),
-                                          )
-                                        : Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.grey[200],
+                          Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Center(
+                                  child: GestureDetector(
+                                onTap: () {
+                                  ImagePickerWidget.showPicker(
+                                      context, galleryClick, cameraClick);
+                                },
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: CircleAvatar(
+                                        radius: 51,
+                                        backgroundColor: grayColor,
+                                        child: _image != null
+                                            ? ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(50)),
-                                            width: 100,
-                                            height: 100,
-                                            child: Icon(
-                                              Icons.camera_alt,
-                                              color: Colors.grey[800],
-                                            ),
-                                          ),
-                                  ),
+                                                    BorderRadius.circular(50),
+                                                child: Image.file(
+                                                  _image!,
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.fitHeight,
+                                                ),
+                                              )
+                                            : Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey[200],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                width: 100,
+                                                height: 100,
+                                                child: Icon(
+                                                  Icons.camera_alt,
+                                                  color: Colors.grey[800],
+                                                ),
+                                              ),
+                                      ),
+                                    ),
+                                    const Positioned(
+                                        right: 0,
+                                        bottom: 40,
+                                        child: Icon(
+                                          Icons.edit,
+                                          color: Colors.black,
+                                          size: 24,
+                                        ))
+                                  ],
                                 ),
-                                const Positioned(
-                                    right: 0,
-                                    bottom: 40,
-                                    child: Icon(
-                                      Icons.edit,
-                                      color: Colors.black,
-                                      size: 24,
-                                    ))
-                              ],
-                            ),
-                          )),
+                              ))),
                           Padding(
                             padding: EdgeInsets.only(top: 6),
                             child: Text(
@@ -200,34 +203,66 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           _buildConfirmPassword(),
-                          ButtonWidget.button(0, primaryColor, textColor, 18, _submit, "Next")
+                          Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 50,
+                              padding: EdgeInsets.only(top: 10),
+                              child: ButtonWidget.button(0, primaryColor,
+                                  textColor, 18, _submit, "Next")),
                         ])))));
   }
 
   onPress() {
     Navigator.of(context).pop();
   }
+
   Future<void> _submit() async {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     } else {
-      if (imgString!="") {
-        rootBundle.load(_image!.path)
-            .then((data) => {
-          setState(() => imageData = data)});
-        var user = User(_firstNameController.text.toString(),_lastNameController.text.toString(),_phoneNoController.text.toString(),_emailController.text.toString(),_passwordController.text.toString(),_selectedGender,imgString,"","","","","","","","","","","");
+      if (imgString != "") {
+        rootBundle
+            .load(_image!.path)
+            .then((data) => {setState(() => imageData = data)});
+        var user = User(
+            _firstNameController.text.toString(),
+            _lastNameController.text.toString(),
+            _phoneNoController.text.toString(),
+            _emailController.text.toString(),
+            _passwordController.text.toString(),
+            _selectedGender,
+            imgString,
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "");
 
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => ProfilePage(user)),
+          MaterialPageRoute(builder: (context) => ProfilePage(user)),
         );
+      } else {
+        Fluttertoast.showToast(
+            msg: "Please add profile picture",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
-
     }
     _formKey.currentState!.save();
   }
+
   Widget _buildFirstName() {
     return TextFormFieldWidget(
       hintText: "Enter your first name here",
@@ -303,7 +338,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildPassword() {
     return TextFormFieldWidget(
       hintText: "Password",
-      obscureText: true,
+      obscureText: _obscureText,
       textInputType: TextInputType.visiblePassword,
       actionKeyboard: TextInputAction.next,
       functionValidate: passwordValidation,

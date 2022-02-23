@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:neosoft/screens/landing_page.dart';
 import 'package:neosoft/utility/theme.dart';
 import 'package:neosoft/view/screens/home_page.dart';
 
@@ -19,15 +18,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: primaryColor,
         splashColor: primaryColor,
-        accentColor:primaryColor ,
+        accentColor: primaryColor,
         shadowColor: primaryColor,
         textTheme: GoogleFonts.nunitoSansTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      home:  HomePage(),
+      home: HomePage(),
     );
   }
 }
-
-

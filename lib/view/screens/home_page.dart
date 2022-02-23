@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:neosoft/screens/pages/user_list.dart';
-import 'package:neosoft/screens/profile_page.dart';
-import 'package:neosoft/screens/register_page.dart';
+import 'package:neosoft/view/screens/profile_page.dart';
 import 'package:neosoft/view/common_widget/button.dart';
 import 'package:neosoft/view/screens/regiser_screen.dart';
+import 'package:neosoft/view/screens/user_list.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/user_model.dart';
@@ -23,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarWidget.appBar("Users",null),
+        appBar: AppBarWidget.appBar("Users", null),
         body: Stack(children: <Widget>[
           ChangeNotifierProvider(
               //create a instance of view_model/provider class
@@ -46,13 +45,11 @@ class _HomePageState extends State<HomePage> {
                           ));
                         },
                       );
-                    }
-                    else if(snapshot.hasError){
-                      return  Center(
+                    } else if (snapshot.hasError) {
+                      return Center(
                         child: Container(),
                       );
-                    }
-                    else {
+                    } else {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );

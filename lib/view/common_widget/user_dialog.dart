@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../model/user_model.dart';
-import '../../utility/image_utility.dart';
 import '../../utility/text_style.dart';
 import '../../utility/theme.dart';
+import 'image_utility.dart';
 
 class CustomUserDetailDialogBox extends StatefulWidget {
    User data;

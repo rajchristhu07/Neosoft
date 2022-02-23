@@ -8,7 +8,7 @@ class ButtonWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         primary: primaryColor,
-        onPrimary: textColor,
+        onPrimary: Colors.white,
         // side: BorderSide(color: Colors.red, width: 1),
         textStyle: TextStyle(
             fontStyle: FontStyle.normal,
