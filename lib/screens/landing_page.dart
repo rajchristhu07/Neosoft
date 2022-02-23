@@ -14,7 +14,7 @@ class LandingPage extends StatefulWidget {
   _LandingPageState createState() => _LandingPageState();
 }
 Future<List<User>> fetchUserFromDatabase() async {
-  var dbHelper = DBHelper();
+  var dbHelper = DBHelper.instance;
   Future<List<User>> user = dbHelper.getUser();
   return user;
 }

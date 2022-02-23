@@ -43,7 +43,7 @@ class _AddressPageState extends State<AddressPage> {
         widget.user.desigination,
         widget.user.domain,);
 
-      var dbHelper = DBHelper();
+      var dbHelper = DBHelper.instance;
       dbHelper.saveUser(user);
       Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) =>  LandingPage()),

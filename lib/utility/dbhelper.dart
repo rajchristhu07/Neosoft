@@ -8,7 +8,8 @@ import '../model/user_model.dart';
 
 class DBHelper {
   static Database? _db;
-
+  DBHelper._privateConstructor();
+  static final DBHelper instance = DBHelper._privateConstructor();
   Future<Database> get db async {
     if (_db != null) return _db!;
     _db = await initDb();
