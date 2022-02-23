@@ -177,7 +177,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget _buildLandmark() {
     return TextFormFieldWidget(
       hintText: "Landmark",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.name,
       actionKeyboard: TextInputAction.next,
       functionValidate: nameValidation,
@@ -195,7 +195,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget _buildAddress() {
     return TextFormFieldWidget(
       hintText: "Address",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.name,
       actionKeyboard: TextInputAction.next,
       functionValidate: nameValidation,
