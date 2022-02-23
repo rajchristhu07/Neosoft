@@ -266,7 +266,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildFirstName() {
     return TextFormFieldWidget(
       hintText: "Enter your first name here",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.name,
       actionKeyboard: TextInputAction.next,
       functionValidate: nameValidation,
@@ -284,7 +284,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildLastName() {
     return TextFormFieldWidget(
       hintText: "Enter your last name here",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.name,
       actionKeyboard: TextInputAction.next,
       functionValidate: nameValidation,
@@ -302,7 +302,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildEmail() {
     return TextFormFieldWidget(
       hintText: "Your email goes here",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.emailAddress,
       actionKeyboard: TextInputAction.next,
       functionValidate: emailValidation,
@@ -320,7 +320,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildPhoneNo() {
     return TextFormFieldWidget(
       hintText: "Enter your 10 digit phone number ",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.number,
       actionKeyboard: TextInputAction.next,
       functionValidate: phoneValidation,

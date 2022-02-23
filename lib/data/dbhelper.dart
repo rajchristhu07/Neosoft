@@ -7,13 +7,14 @@ import 'package:path_provider/path_provider.dart';
 import '../model/user_model.dart';
 
 class DBHelper {
-  static Database? _db;
-  DBHelper._privateConstructor();
-  static final DBHelper instance = DBHelper._privateConstructor();
-  Future<Database> get db async {
-    if (_db != null) return _db!;
-    _db = await initDb();
-    return _db!;
+  DBHelper._();
+
+  static final DBHelper? db = DBHelper._();
+   Database? _database;
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+    _database = await initDb();
+    return _database!;
   }
 
   initDb() async {
@@ -30,14 +31,14 @@ class DBHelper {
   }
 
   Future<User> saveUser(User user) async {
-    var dbClient = await db;
+    var dbClient = await database;
     await dbClient.insert("USER", user.toMap());
     return user;
 
   }
 
   Future<List<User>> getUser() async {
-    var dbClient = await db;
+    var dbClient = await database;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM USER');
     List<User> user =  [];
     for (int i = 0; i < list.length; i++) {

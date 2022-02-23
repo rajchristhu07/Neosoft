@@ -379,7 +379,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildGrade() {
     return TextFormFieldWidget(
       hintText: "Enter your grade of Percentage",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.number,
       actionKeyboard: TextInputAction.next,
       functionValidate: commonValidation,
@@ -393,7 +393,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildExp() {
     return TextFormFieldWidget(
       hintText: "Enter your grade of Experience ",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.number,
       actionKeyboard: TextInputAction.next,
       functionValidate: commonValidation,

@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:neosoft/view/screens/home_page.dart';
 
 import '../../model/user_model.dart';
-import '../../utility/dbhelper.dart';
+import '../../data/dbhelper.dart';
 import '../../utility/text_style.dart';
 import '../../utility/theme.dart';
 import '../common_widget/text_field.dart';
@@ -64,8 +64,8 @@ class _AddressPageState extends State<AddressPage> {
         widget.user.domain,
       );
 
-      var dbHelper = DBHelper.instance;
-      dbHelper.saveUser(user);
+      var dbHelper = DBHelper.db;
+      dbHelper!.saveUser(user);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => HomePage()),
           (route) => false);
@@ -79,7 +79,7 @@ class _AddressPageState extends State<AddressPage> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
           toolbarHeight: 60,
@@ -154,14 +154,14 @@ class _AddressPageState extends State<AddressPage> {
                       ),
                       _buildPincode(),
                       Container(
-                          padding: EdgeInsets.only(top: 30, bottom: 40),
+                          padding: EdgeInsets.only(top: 10),
                           width: MediaQuery.of(context).size.width,
                           height: 50,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: primaryColor,
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Submit',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
@@ -213,7 +213,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget _buildCity() {
     return TextFormFieldWidget(
       hintText: "City",
-      obscureText: true,
+      obscureText: false,
       textInputType: TextInputType.name,
       actionKeyboard: TextInputAction.next,
       functionValidate: nameValidation,
@@ -231,8 +231,8 @@ class _AddressPageState extends State<AddressPage> {
   Widget _buildPincode() {
     return TextFormFieldWidget(
       hintText: "Pincode",
-      obscureText: true,
-      textInputType: TextInputType.name,
+      obscureText: false,
+      textInputType: TextInputType.number,
       actionKeyboard: TextInputAction.next,
       functionValidate: nameValidation,
       controller: __pincodeController,

@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:neosoft/utility/theme.dart';
 import 'package:neosoft/view/screens/home_page.dart';
 
+import 'data/blocs/bloc_provider.dart';
+import 'data/blocs/user_bloc.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,7 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return BlocProvider<UsersBloc>(
+        bloc: UsersBloc(),
+    child:  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Registration',
       theme: ThemeData(
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: HomePage(),
-    );
+      home:  HomePage(),
+    ));
   }
 }
