@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:neosoft/model/user_model.dart';
 import 'package:neosoft/view/screens/address_page.dart';
+import 'package:provider/provider.dart';
 
+import '../../container/injection_container.dart';
 import '../../utility/text_style.dart';
 import '../../utility/theme.dart';
+import '../../view_model/register_viewmodel.dart';
 import '../common_widget/appbar.dart';
 import '../common_widget/button.dart';
 import '../common_widget/text_field.dart';
 
 class ProfilePage extends StatefulWidget {
   User user;
-
   ProfilePage(this.user);
 
   @override
@@ -49,7 +51,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AddressPage(user)),
+        MaterialPageRoute(builder: (context) => ChangeNotifierProvider(
+          child: AddressPage(user),
+          create: (ctx) => RegisterViewModel(serviceLocater()),
+        ),)
       );
     }
     _formKey.currentState!.save();

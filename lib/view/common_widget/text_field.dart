@@ -154,7 +154,7 @@ String? phoneValidation(String value, String messageError) {
   return null;
 }
 String? conPasswordValidation(String value, String messageError) {
-  if (value.toString() != messageError.toString()) {
+  if (value.toString() == "") {
     return "Mismatch the password!";
   }
   return null;

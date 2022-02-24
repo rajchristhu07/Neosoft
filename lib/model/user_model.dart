@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 class User {
+  int? id;
   String? firstName;
   String? lastName;
   String? mobileNo;
@@ -21,29 +22,28 @@ class User {
   String? domain;
 
   User(
-      this.firstName,
-      this.lastName,
-      this.mobileNo,
-      this.emailId,
-      this.password,
-      this.gender,
-      this.picture,
-      this.address,
-      this.landmark,
-      this.city,
-      this.state,
-      this.pincode,
-      this.educational,
-      this.year,
-      this.grade,
-      this.exp,
-      this.desigination,
-      this.domain,
-
-
-      );
+    this.firstName,
+    this.lastName,
+    this.mobileNo,
+    this.emailId,
+    this.password,
+    this.gender,
+    this.picture,
+    this.address,
+    this.landmark,
+    this.city,
+    this.state,
+    this.pincode,
+    this.educational,
+    this.year,
+    this.grade,
+    this.exp,
+    this.desigination,
+    this.domain,
+  );
 
   User.fromMap(Map map) {
+    id = map[id];
     firstName = map[firstName];
     lastName = map[lastName];
     mobileNo = map[mobileNo];
@@ -65,6 +65,7 @@ class User {
   }
 
   Map<String, dynamic> toMap() => {
+        "id": id,
         "firstName": firstName,
         "lastName": lastName,
         "mobileNo": mobileNo,

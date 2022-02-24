@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neosoft/view/screens/home_page.dart';
+import 'package:neosoft/view_model/register_viewmodel.dart';
+import 'package:provider/provider.dart';
 
+import '../../container/injection_container.dart';
 import '../../model/user_model.dart';
 import '../../data/dbhelper.dart';
 import '../../utility/text_style.dart';
@@ -15,7 +18,6 @@ import '../common_widget/text_field.dart';
 
 class AddressPage extends StatefulWidget {
   User user;
-
   AddressPage(this.user);
 
   @override
@@ -23,6 +25,7 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
+
   final List<String> _stateList = ["Mumbai", "Chennai"];
   String _currentState = "Mumbai";
   var _formKey = GlobalKey<FormState>();
@@ -38,7 +41,7 @@ class _AddressPageState extends State<AddressPage> {
   final __addressController = TextEditingController();
   final __landmarkController = TextEditingController();
 
-  void _submit() {
+  void _submit(RegisterViewModel provider) {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
@@ -63,11 +66,12 @@ class _AddressPageState extends State<AddressPage> {
         widget.user.desigination,
         widget.user.domain,
       );
-
-      var dbHelper = DBHelper.db;
-      dbHelper!.saveUser(user);
+      provider.addUser(user);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) =>  ChangeNotifierProvider(
+            child: HomePage(),
+            create: (ctx) => RegisterViewModel(serviceLocater()),
+          ),),
           (route) => false);
     }
     _formKey.currentState!.save();
@@ -75,6 +79,8 @@ class _AddressPageState extends State<AddressPage> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<RegisterViewModel>(context, listen: false);
+
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
@@ -167,7 +173,7 @@ class _AddressPageState extends State<AddressPage> {
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               onPressed: () {
-                                _submit();
+                                _submit(provider);
                               })),
                     ],
                   ),

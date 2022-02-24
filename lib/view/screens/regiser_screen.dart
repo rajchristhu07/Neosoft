@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neosoft/view/common_widget/button.dart';
+import 'package:neosoft/view_model/register_viewmodel.dart';
 
 import '../../model/user_model.dart';
 import '../common_widget/image_utility.dart';
@@ -18,6 +19,9 @@ import '../common_widget/image_picker.dart';
 import '../common_widget/text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
+
+
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -242,8 +246,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             "",
             "",
             "",
-            "",
-            "");
+            "","");
 
         Navigator.push(
           context,
